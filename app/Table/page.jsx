@@ -1,44 +1,46 @@
 "Use Client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { listTasks, completeTask, deleteTask } from "@/api/tasks";
+import { toast } from "react-toastify";
 
-export default function Tasktable({ data, setTask }) {
+export default function Tasktable() {
+    const [taskList, setTaskList] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [deleteId, setDeleteId] = useState();
-    const completeTask = (e, id) => {
+    const completeTaskHandler = async (e, id) => {
         e.preventDefault();
-        const ISTOptions = {
-            timeZone: "Asia/Kolkata",
-            hour12: true, // Use 12-hour format
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-        };
-        const dateTime = new Date().toLocaleString("en-IN", ISTOptions);
-        const updatedData = data.map((task) => {
-            if (task.id === id) {
-                return { ...task, completionDate: dateTime };
-            }
-            return task;
-        });
-        setTask(updatedData);
+        const completeTaskResponse = await completeTask(id);
+        if (completeTaskResponse) {
+            toast.success(completeTaskResponse.data.message);
+            getTasks();
+        } else {
+            toast.error(completeTaskResponse.data.message);
+        }
     };
-    const deleteTask = (e, id) => {
+    const deleteTaskHandler = (e, id) => {
         e.preventDefault();
         setDeleteId(id);
         setIsOpen(true);
     };
-    const confirmDeleteTask = (e) => {
+    const confirmDeleteTask = async (e) => {
         e.preventDefault();
-        const updatedData = data.filter((task) => {
-            return task.id !== deleteId;
-        });
-        setTask(updatedData);
+        const deleteTaskResponse = await deleteTask(deleteId);
+        if (deleteTaskResponse) {
+            toast.success(deleteTaskResponse.message);
+            getTasks();
+        } else {
+            toast.error(deleteTaskResponse.message);
+        }
         setIsOpen(false);
     };
 
+    const getTasks = async () => {
+        const taskslist = await listTasks();
+        setTaskList(taskslist.data);
+    };
+    useEffect(() => {
+        getTasks();
+    }, []);
     return (
         <>
             <div className="flex flex-col">
@@ -66,8 +68,8 @@ export default function Tasktable({ data, setTask }) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data &&
-                                        data.map((val, index) => (
+                                    {taskList &&
+                                        taskList.map((val, index) => (
                                             <tr
                                                 key={val.id}
                                                 className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
@@ -76,22 +78,24 @@ export default function Tasktable({ data, setTask }) {
                                                     {index + 1}
                                                 </td>
                                                 <td className="whitespace-nowrap px-6 py-4 font-medium">
-                                                    {val.completionDate ? (
+                                                    {val.taskCompleteDate ? (
                                                         <span className="line-through">
-                                                            {val.name}
+                                                            {val.taskName}
                                                         </span>
                                                     ) : (
-                                                        <span>{val.name}</span>
+                                                        <span>
+                                                            {val.taskName}
+                                                        </span>
                                                     )}
                                                 </td>
                                                 <td className="whitespace-nowrap px-6 py-4">
-                                                    {val.createdDate}
+                                                    {val.taskCreateDate}
                                                 </td>
                                                 <td className="whitespace-nowrap px-6 py-4">
-                                                    {val.completionDate}
+                                                    {val.taskCompleteDate}
                                                 </td>
                                                 <td className="whitespace-nowrap px-6 py-4">
-                                                    {val.completionDate ? (
+                                                    {val.taskCompleteDate ? (
                                                         <button className="pointer-events-none bg-green-300 text-white font-bold py-2 px-4 rounded disabled:opacity-70 mr-2">
                                                             Completed
                                                         </button>
@@ -99,20 +103,20 @@ export default function Tasktable({ data, setTask }) {
                                                         <button
                                                             className="bg-black hover:bg-green-400 text-white font-bold py-2 px-4 rounded mr-2"
                                                             onClick={(e) =>
-                                                                completeTask(
+                                                                completeTaskHandler(
                                                                     e,
                                                                     val.id
                                                                 )
                                                             }
                                                         >
-                                                            Completed
+                                                            Complete
                                                         </button>
                                                     )}
 
                                                     <button
                                                         className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 rounded"
                                                         onClick={(e) =>
-                                                            deleteTask(
+                                                            deleteTaskHandler(
                                                                 e,
                                                                 val.id
                                                             )

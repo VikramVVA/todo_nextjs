@@ -12,10 +12,10 @@ export default function Header() {
                             <Link href="/">Home</Link>
                         </li>
                         <li className="mx-2">
-                            <Link href="/">About</Link>
+                            <Link href="/Task/addtask">Add Tasks</Link>
                         </li>
                         <li className="mx-2">
-                            <Link href="/">Tasks</Link>
+                            <Link href="/Table">Tasks</Link>
                         </li>
                     </ul>
                 </div>
