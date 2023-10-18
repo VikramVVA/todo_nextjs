@@ -72,7 +72,7 @@ export default function Tasktable() {
                                         taskList.map((val, index) => (
                                             <tr
                                                 key={val.id}
-                                                className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
+                                                className="border-b transition duration-300 ease-in-out transform hover:scale-95 hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
                                             >
                                                 <td className="whitespace-nowrap px-6 py-4 font-medium">
                                                     {index + 1}

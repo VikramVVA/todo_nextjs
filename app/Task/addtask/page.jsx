@@ -30,16 +30,18 @@ export default function Addtask() {
     return (
         <>
             <div className="flex flex-col items-center">
-                <div className="w-1/2 px-8 py-8 mt-12 border border-gray-200 rounded">
+                <div className="w-1/2 px-8 py-8 mt-12 border border-gray-200 rounded-lg">
                     <div className="flex justify-center">
-                        <h1 className="uppercase text-gray-700 font-bold text-xl mb-8">Add Task</h1>
+                        <h1 className="uppercase text-gray-700 font-bold text-xl mb-8">
+                            Add Task
+                        </h1>
                     </div>
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Enter Task Name
                     </label>
                     <div>
                         <input
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            className="appearance-none block w-full text-gray-700 border shadow-sm border-slate-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-sky-500 focus:ring-sky-500 focus:ring-1 transition duration-300 ease-in-out transform hover:scale-105"
                             type="text"
                             placeholder=""
                             value={name}
@@ -53,7 +55,7 @@ export default function Addtask() {
                     </label>
                     <div>
                         <input
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            className="appearance-none block w-full text-gray-700 border shadow-sm border-slate-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-sky-500 focus:ring-sky-500 focus:ring-1 transition duration-300 ease-in-out transform hover:scale-105"
                             type="text"
                             placeholder=""
                             value={description}
