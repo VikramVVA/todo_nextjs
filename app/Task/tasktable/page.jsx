@@ -1,6 +1,6 @@
-"Use Client";
+"use client";
 import React, { useState, useEffect } from "react";
-import { listTasks, completeTask, deleteTask } from "@/api/tasks";
+import { listTasks, completeTask, deleteTask } from "@/app/api/tasks";
 import { toast } from "react-toastify";
 
 export default function Tasktable() {

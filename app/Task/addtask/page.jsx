@@ -1,6 +1,6 @@
-"Use Client";
+"use client";
 import React, { useState } from "react";
-import { createTask } from "@/api/tasks";
+import { createTask } from "@/app/api/tasks";
 import { toast } from "react-toastify";
 
 export default function Addtask() {

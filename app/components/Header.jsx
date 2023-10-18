@@ -15,7 +15,7 @@ export default function Header() {
                             <Link href="/Task/addtask">Add Tasks</Link>
                         </li>
                         <li className="mx-2">
-                            <Link href="/Table">Tasks</Link>
+                            <Link href="/Task/tasktable">Tasks</Link>
                         </li>
                     </ul>
                 </div>
