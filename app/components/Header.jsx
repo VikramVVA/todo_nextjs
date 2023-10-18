@@ -4,7 +4,7 @@ import React from "react";
 export default function Header() {
     return (
         <>
-            <div className="bg-black text-white flex flex-row justify-between p-8 sticky top-0">
+            <div className="bg-black text-white flex flex-row justify-between p-8 sticky top-0 z-10">
                 <div></div>
                 <div>
                     <ul className="flex flex-row mx-4">
